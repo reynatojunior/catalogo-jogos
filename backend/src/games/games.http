@@ -1,0 +1,26 @@
+### Listar todos os games
+
+GET http://localhost:3000/games
+
+### Listar games por ID
+
+GET http://localhost:3000/games/1
+
+### Criar um novo game
+
+POST http://localhost:3000/games
+Content-Type: application/json
+
+{
+    "nome": "pacman",
+    "tipo": "ventura",
+    "ano": 1980
+}
+
+### Atualizar um game
+
+PUT http://localhost:3000/games/1
+
+### Deletar um game
+
+DELETE http://localhost:3000/games/1

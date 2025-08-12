@@ -1,0 +1,80 @@
+<div class="container">
+  <h2>Lista de Games</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Ano</th>
+        
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let games of games">
+        <!-- <td>{{ games.id }}</td> -->
+        <td>{{ games.nome }}</td>
+        <td>{{ games.tipo }}</td>
+        <td>{{ games.ano }}</td>
+
+        <!-- <td>{{ games.preco | currency:'BRL' }}</td> -->
+        
+        <td>
+          <button (click)="selecionarGame(games.id!)" class="btn-edit">Editar</button>
+          <button (click)="deletarGame(games.id!)" class="btn-delete">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-container">
+    <h3>{{ gameSelecionado ? 'Editar Game' : 'Criar Novo Game' }}</h3>
+    <form (submit)="salvarGames()">
+      <div class="form-group">
+        <label>Nome:</label>
+        <input 
+          type="text"
+          [ngModel]="gameSelecionado ? gameSelecionado.nome : novoGame.nome"
+          (ngModelChange)="gameSelecionado ? gameSelecionado.nome = $event : novoGame.nome = $event"
+          name="nome" 
+          required
+        >
+      </div>
+      <div class="form-group">
+        <label>Tipo:</label>
+        <input 
+          type="text"
+          [ngModel]="gameSelecionado ? gameSelecionado.tipo : novoGame.tipo"
+          (ngModelChange)="gameSelecionado ? gameSelecionado.tipo = $event : novoGame.tipo = $event"
+          name="tipo" 
+          required
+        >
+      </div>
+      <div class="form-group">
+        <label>Ano:</label>
+        <input 
+          type="number" 
+          [ngModel]="gameSelecionado ? gameSelecionado.ano : novoGame.ano"
+          (ngModelChange)="gameSelecionado ? gameSelecionado.ano = $event : novoGame.ano = $event"
+
+          name="ano" 
+          required
+        >
+      </div>
+      
+      <button type="submit" class="btn-save">
+        {{ gameSelecionado ? 'Atualizar' : 'Salvar' }}
+      </button>
+      <button 
+        *ngIf="gameSelecionado" 
+        type="button" 
+        (click)="gameSelecionado = null" 
+        class="btn-cancel"
+      >
+        Cancelar
+      </button>
+    </form>
+  </div>
+</div>
